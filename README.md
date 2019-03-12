@@ -1,6 +1,6 @@
 # zabbix-flexlm
 
-## A zabbix plugin for monitoring FlexLM licence usage
+A zabbix plugin for monitoring FlexLM licence usage
 
 ## Instructions for installation
 
