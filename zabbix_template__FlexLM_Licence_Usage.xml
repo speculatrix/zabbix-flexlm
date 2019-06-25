@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>4.0</version>
-    <date>2019-03-08T10:19:21Z</date>
+    <version>4.2</version>
+    <date>2019-06-25T11:11:08Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -9,8 +9,8 @@
     </groups>
     <templates>
         <template>
-            <template>FlexLM licence usage</template>
-            <name>FlexLM licence usage</name>
+            <template>FlexLM Licence Usage</template>
+            <name>FlexLM Licence Usage</name>
             <description>This depends on&#13;
 &#13;
 * a configuration file at /etc/zabbix/zabbix_agentd.conf.d/flexlm_licence_usage.conf&#13;
@@ -36,7 +36,7 @@ on the monitored node.</description>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>flexlm.discovery</key>
-                    <delay>1m</delay>
+                    <delay>1h</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -183,7 +183,25 @@ on the monitored node.</description>
                             <master_item/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{FlexLM Licence Usage:flexlm.total[{#FEATURE}].last()} - &#13;
+{FlexLM Licence Usage:flexlm.used[{#FEATURE}].last()} = 0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>{#FEATURE} licences exhausted</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>2</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
                             <name>Licence Usage {#FEATURE}</name>
@@ -211,7 +229,7 @@ on the monitored node.</description>
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>FlexLM licence usage</host>
+                                        <host>FlexLM Licence Usage</host>
                                         <key>flexlm.total[{#FEATURE}]</key>
                                     </item>
                                 </graph_item>
@@ -223,7 +241,7 @@ on the monitored node.</description>
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>FlexLM licence usage</host>
+                                        <host>FlexLM Licence Usage</host>
                                         <key>flexlm.used[{#FEATURE}]</key>
                                     </item>
                                 </graph_item>
@@ -249,12 +267,16 @@ on the monitored node.</description>
                     <ssl_key_password/>
                     <verify_peer>0</verify_peer>
                     <verify_host>0</verify_host>
+                    <lld_macro_paths/>
+                    <preprocessing/>
+                    <master_item/>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
             <macros/>
             <templates/>
             <screens/>
+            <tags/>
         </template>
     </templates>
 </zabbix_export>
